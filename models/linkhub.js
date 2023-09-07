@@ -2,7 +2,7 @@ const mongoose=require("mongoose")
 
 const linksSchema = mongoose.Schema(
     { 
-        author:{
+        username:{
             type:String,
         ref:'User'
         },
@@ -24,10 +24,10 @@ const linksSchema = mongoose.Schema(
         hackerearth:{
             type:String,   
         },
-        instagram:{
+        facebook:{
             type:String,   
         },
-        facebook:{
+        instagram:{
             type:String,   
         },
         linkedin:{
