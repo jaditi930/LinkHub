@@ -42,6 +42,9 @@ const linksSchema = mongoose.Schema(
         portfolio:{
             type:String,   
         },
+        path:{
+            type:String
+          },
     },
         {
             strict:false

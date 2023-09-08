@@ -3,7 +3,18 @@ const dotenv=require("dotenv").config()
 const app=express()
 const cors=require("cors")
 const connectDb=require("./connectDb")
+const fileUpload=require("express-fileupload")
 
+app.use(express.static('static'))               // static dir path
+
+app.use(
+    fileUpload({
+        limits: {
+            fileSize: 10000000,
+        },
+        abortOnLimit: true,
+    })
+);
 
 const port=process.env.PORT
 

@@ -5,18 +5,37 @@ const LinkHub=require("../models/linkhub")
 const router=express.Router();
 const bcrypt=require("bcrypt")
 const jwt=require("jsonwebtoken")
+const {v4 : uuidv4} = require('uuid')
 const validateToken=require("../middleware/token")
 
 // linkhub routes
 router.post("/create", validateToken, asyncHandler(async(req,res)=>{
+    const exists=await LinkHub.findOne({"user":req.user.username})
+    if(exists)
+    {
+        res.status(400).json({"message":"LinkHub already exists."})
+        return;
+    }
     const {gfg,leetcode,codechef,codeforces,hackerrank,hackerearth,
         facebook,instagram,linkedin,github,website,portfolio,others}       = req.body
-
+    const def_path="user.jpeg"
+    var path=""
+    try{
+        const {profile}=req.files;
+        console.log(profile)
+        path=uuidv4()+profile.mimetype.split("/")[1]
+    }
+    catch{
+    path=def_path
+    }
+    console.log(others)
     const linkHub=new LinkHub({user:req.user.username,gfg,leetcode,codechef,codeforces,hackerrank,hackerearth,
-        facebook,instagram,linkedin,github,website,portfolio})
+        facebook,instagram,linkedin,github,website,portfolio,path})
         linkHub.set("others",others)
         linkHub.save()
-    res.status(200).json(linkHub)
+        if(path!=def_path)
+        profile.mv('./'+ '/static/profiles/'+path+"."+profile.mimetype.split("/")[1]);
+        res.status(200).json(linkHub)
 }))
 
 router.post("/edit",validateToken,  asyncHandler(async(req,res)=>{
