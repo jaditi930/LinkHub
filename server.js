@@ -21,8 +21,7 @@ app.use(express.json())
 app.use(cors(corsOptions));
 
 // for routes
-app.use("/api/users",require("./routes/user"))
-app.use("/api/linkhub",require("./routes/linkhub"))
+app.use("/",require("./routes/linkhub"))
 
 
 app.listen(port,()=>{
