@@ -8,9 +8,10 @@ router.post("/create", validateToken, asyncHandler(async(req,res)=>{
     const {gfg,leetcode,codechef,codeforces,hackerrank,hackerearth,
         facebook,instagram,linkedin,github,website,portfolio,others}       = req.body
 
-    const linkHub=await LinkHub.create({user:req.user.username,gfg,leetcode,codechef,codeforces,hackerrank,hackerearth,
+    const linkHub=new LinkHub({user:req.user.username,gfg,leetcode,codechef,codeforces,hackerrank,hackerearth,
         facebook,instagram,linkedin,github,website,portfolio})
-
+        linkHub.set("others",others)
+        linkHub.save()
     res.status(200).json(linkHub)
 }))
 
