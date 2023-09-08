@@ -1,5 +1,6 @@
 const express=require("express")
 const asyncHandler=require("express-async-handler")
+const User=require("../models/user")
 const LinkHub=require("../models/linkhub")
 const router=express.Router();
 const bcrypt=require("bcrypt")
