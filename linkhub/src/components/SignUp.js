@@ -21,33 +21,30 @@ export default function SignUp(){
         })
     }
     return (
-        <div class="bg">
-        <form className="login_form">
-            <h1 class="form_title">SignUp</h1>
-            <div class="message">Become a LinkHub member now! </div>
-            <div class="switch_container">
-                <span class="switch_btn">
+        <div className="bg">
+        <form classNameName="login_form">
+            <h1 className="form_title">SignUp</h1>
+            <div className="message">Become a LinkHub member now! </div>
+            <div className="switch_container">
+                <span className="switch_btn">
                     <Link to='/login'>Login</Link>
                 </span>
-                <span class="switch_btn">
+                <span className="switch_btn">
                     <Link to='/'>SignUp</Link>
                 </span>
             </div>
-        <div class="flexside">
-            <input class="form_inputs side " type="text" name="firstname" id="firstname" placeholder="First Name"/>
-            <input class="form_inputs side" type="text" name="lastname" id="lastname" placeholder="Last Name"/>
+        <div className="flexside">
+            <input className="form_inputs side " type="text" name="firstname" id="firstname" placeholder="First Name"/>
+            <input className="form_inputs side" type="text" name="lastname" id="lastname" placeholder="Last Name"/>
 
         </div>
-        {/* <div>
-            <input class="form_inputs" type="text" name="lastname" id="lastname" placeholder="Last Name"/>
-        </div> */}
         <div>
-            <input class="form_inputs" type="text" name="username" id="username" placeholder="Username"/>
+            <input className="form_inputs" type="text" name="username" id="username" placeholder="Username"/>
         </div>
         <div>
-            <input class="form_inputs" type="password" name="password" id="password" placeholder="Password"/>
+            <input className="form_inputs" type="password" name="password" id="password" placeholder="Password"/>
         </div>
-        <button class="submit_btn" onClick={(e)=>{
+        <button className="submit_btn" onClick={(e)=>{
                 e.preventDefault();
                 signupUser()
             }}>SignUp</button>

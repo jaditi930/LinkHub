@@ -24,28 +24,28 @@ export default function Login(props){
 
     }
     return (
-        <div class="bg">
-        <form class="login_form">
-            <h1 class="form_title">Login</h1>
-            <div class="switch_container">
-                <span class="switch_btn">
+        <div className="bg">
+        <form className="login_form">
+            <h1 className="form_title">Login</h1>
+            <div className="switch_container">
+                <span className="switch_btn">
                     <Link to='/login'>Login</Link>
                 </span>
-                <span class="switch_btn">
+                <span className="switch_btn">
                     <Link to='/signup'>SignUp</Link>
                 </span>
             </div>
         <div >
-            <input class="form_inputs" type="text" name="username" id="username" placeholder="Username"></input>
+            <input className="form_inputs" type="text" name="username" id="username" placeholder="Username"></input>
         </div>
         <div >
-            <input class="form_inputs" type="password" name="password" id="password" placeholder="Password"></input>
+            <input className="form_inputs" type="password" name="password" id="password" placeholder="Password"></input>
         </div>
-            <button class="submit_btn" onClick={(e)=>{
+            <button className="submit_btn" onClick={(e)=>{
                 e.preventDefault();
                 logUser()
             }}>Login</button>
-        <div class="message">
+        <div className="message">
         <Link to='/signup'>  Not a member ? Signup now </Link>
         </div>
         </form>

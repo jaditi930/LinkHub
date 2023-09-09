@@ -33,63 +33,85 @@ export default function Create(props){
           console.log(err))
     }
     return (
-        <form action="">
-            <div class="inputGroup" style={{"display":"flex"}}>
-                <input  type="text" name="gfg" id="gfg" placeholder="GeeksForGeeks" style={{marginRight:"35px"}}/>
-                <label htmlFor="gfg"></label>
-                <input type="text" name="codechef" id="codechef" placeholder="Codechef"/>
-                <label htmlFor="codechef"></label>
+        <div className="bg">
+          <form action="" className="create_form">
+            <h1 className="create_title">CODING PLATFORMS</h1>
+            <div className="flex">
+
+                <div class="inputGroup r">
+                    <input  type="text" name="gfg" id="gfg" required="" autocomplete="off"/>
+                    <label htmlFor="gfg">GeeksForGeeks</label>
+                </div>
+                <div class="inputGroup">
+                <input type="text" name="codechef" id="codechef" required="" autocomplete="off"/>
+                    <label htmlFor="codechef">Codechef</label>
+                </div>
+
             </div>
-            {/* <div class="inputGroup">
-                <input type="text" name="codechef" id="codechef" placeholder="Codechef"/>
-                <label htmlFor="codechef"></label>
-            </div> */}
-            <div class="inputGroup">
-                <input  type="text" name="leetcode" id="leetcode" placeholder="LeetCode"/>
-                <label htmlFor="leetcode"></label>
-            </div>
-            <div class="inputGroup">
-                <input  type="text" name="codeforces" id="codeforces" placeholder="CodeForces"/>
-                <label htmlFor="codeforces"></label>
-            </div>
-            <div class="inputGroup">
-                <input  type="text" name="hackerrank" id="hackerrank" placeholder="HackerRank"/>
-                <label htmlFor="hackerrank"></label>
+           
+        <div className="flex">
+        <div class="inputGroup r">
+                <input  type="text" name="leetcode" id="leetcode" class="rmargin"/>
+                <label htmlFor="leetcode">LeetCode</label>
             </div>
             <div class="inputGroup">
-                <input  type="text" name="hackerearth" id="hackerearth" placeholder="HackerEarth"/>
-                <label htmlFor="hackerearth"></label>
+                <input  type="text" name="codeforces" id="codeforces"/>
+                <label htmlFor="codeforces">CodeForces</label>
+            </div>
+        </div>
+            
+            <div className="flex">
+                <div class="inputGroup r">
+                    <input  type="text" name="hackerrank" id="hackerrank" class="rmargin"/>
+                    <label htmlFor="hackerrank">HackerRank</label>
+                </div>
+                <div class="inputGroup">
+                    <input  type="text" name="hackerearth" id="hackerearth"/>
+                    <label htmlFor="hackerearth">HackerEarth</label>
+                </div>
+            </div>
+            <h1 className="create_title">PERSONAL WEBSITES</h1>
+            <div className="flex">
+            <div class="inputGroup r">
+                <input  type="text" name="portfolio" id="portfolio" class="rmargin"/>
+                <label htmlFor="portfolio">Portfolio</label>
             </div>
             <div class="inputGroup">
-                <input  type="text" name="portfolio" id="portfolio" placeholder="Portfolio"/>
-                <label htmlFor="portfolio"></label>
+                <input  type="text" name="website" id="website"/>
+                <label htmlFor="website">Website</label>
+            </div>
+            </div>
+            <h1 className="create_title">SOCIAL MEDIA</h1>
+        <div className="flex">
+            <div class="inputGroup r">
+                    <input  type="text" name="instagram" id="instagram" class="rmargin"/>
+                    <label htmlFor="instagram">Instagram</label>
             </div>
             <div class="inputGroup">
-                <input  type="text" name="website" id="website" placeholder="Website"/>
-                <label htmlFor="website"></label>
+                <input  type="text" name="facebook" id="facebook"/>
+                <label htmlFor="facebook">Facebook</label>
             </div>
-            <div class="inputGroup">
-                <input  type="text" name="instagram" id="instagram" placeholder="Instagram"/>
-                <label htmlFor="instagram"></label>
+        </div>
+
+        <div className="flex">
+        <div class="inputGroup r">
+                <input type="text" name="linkedin" id="linkedin" class="rmargin"/>
+                <label htmlFor="linkedin">LinkedIn</label>
+        </div>
+        <div class="inputGroup">
+                <input  type="text" name="github" id="github"/>
+                <label htmlFor="github">GithHub</label>
             </div>
-            <div class="inputGroup">
-                <input type="text" name="linkedin" id="linkedin" placeholder="LinkedIn"/>
-                <label htmlFor="linkedin"></label>
-            </div>
-            <div class="inputGroup">
-                <input  type="text" name="facebook" id="facebook" placeholder="Facebook"/>
-                <label htmlFor="facebook"></label>
-            </div>
-            <div class="inputGroup">
-                <input  type="text" name="github" id="github" placeholder="Github"/>
-                <label htmlFor="github"></label>
-            </div>
+        </div>
+
             <div>
-                <button onClick={(e)=>{
+                <button className="create_btn" onClick={(e)=>{
                     e.preventDefault();
-                    create();
+                    create(); 
                 }}>Submit</button>
             </div>
-        </form>
+    </form>
+    </div>
     )
+
 }
