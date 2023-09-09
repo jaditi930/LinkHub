@@ -20,7 +20,7 @@ function App() {
       <Route exact path="/" element={<Home/>}></Route>
       <Route exact path="/login" element={<Login token={token} setToken={setToken} setNav={setNav} setUser={setUser}/>}></Route>
       <Route path="/signup" element={<SignUp/>}></Route>
-      <Route path="/create" element={<Create token={token}/>}></Route>
+      <Route path="/create" element={<Create/>}></Route>
       {/* <Route path="/edit" element={<Edit token={token} setToken={setToken}/>}></Route> */}
       <Route path="/:username" element={<View />}></Route>
     </Routes>

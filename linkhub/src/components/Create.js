@@ -23,8 +23,7 @@ export default function Create(props){
         console.log(linkhub)
         await axios.post("https://linkhub-api-pnmu.onrender.com/create",linkhub,{
             headers:{
-              'Authorization':`Bearer ${props.token}`,
-            //   'Content-Type': 'multipart/form-data'
+              'Authorization':`Bearer ${localStorage.getItem("access_token")}`,
             }
           },)
           .then((response)=>

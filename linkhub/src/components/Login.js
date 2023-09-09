@@ -14,6 +14,7 @@ export default function Login(props){
         .then((response)=>{
             props.setToken(response.data.token)
             console.log(response.data.token)
+            localStorage.setItem("access_token",response.data.token)
             props.setNav("block")
             props.setUser(user.username)
             navigate("/")
