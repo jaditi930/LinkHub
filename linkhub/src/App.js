@@ -23,7 +23,7 @@ function App() {
       <Route path="/signup" element={<SignUp/>}></Route>
       <Route path="/create" element={<Create token={token}/>}></Route>
       {/* <Route path="/edit" element={<Edit token={token} setToken={setToken}/>}></Route> */}
-      {/* <Route path="/:username" element={<View />}></Route> */}
+      <Route path="/:username" element={<View />}></Route>
     </Routes>
   </Router> 
   );
