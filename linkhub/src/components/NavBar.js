@@ -6,7 +6,7 @@ export default function NavBar(props){
             <ul className="nav_ul">
                 <li className="nav_li"><Link to='/'>Home</Link></li>
                 <li className="nav_li"><Link to='/create'>Create</Link></li>
-                <li className="nav_li"><Link to={`/${props.user}`}>View</Link></li>
+                <li className="nav_li"><Link to={`/${localStorage.getItem("username")}`}>View</Link></li>
                 <li className="nav_li"><Link to='/edit'>Edit</Link></li>
                 <li className="nav_li right"><Link to='/logout'>Logout</Link></li>
 

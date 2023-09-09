@@ -1,21 +1,25 @@
 import axios from "axios";
-import { useEffect,useHistory, useState } from "react";
-export default function Create(props){
-    const history=useHistory();
+import { useEffect, useState } from "react";
+
+export default function Edit(props){
     const [linksHub,setLinksHub]=useState([])
-    const user=history.location.pathname.split("/")[-1]
     useEffect(()=>{(async()=> {
-            await axios.get(`https://linkhub-api-pnmu.onrender.com/${user}`,
+            console.log(props.user)
+            await axios.get(`https://linkhub-api-pnmu.onrender.com/${localStorage.getItem("username")}`,
             {
                 headers:{
-                  'Authorization':`Bearer ${props.token}`,
+                  'Authorization':`Bearer ${localStorage.getItem("access_token")}`,
                 //   'Content-Type': 'multipart/form-data'
                 }
-            }
+            })
             .then((response)=>{
                 setLinksHub(response.data)
+                console.log(response.data)
             })
-            )
+            .catch((err)=>{
+                console.log(err)
+            })
+            
         }
         )()
     },[]
@@ -39,9 +43,9 @@ export default function Create(props){
 
         }
         console.log(linkhub)
-        await axios.post("https://linkhub-api-pnmu.onrender.com/create",linkhub,{
+        await axios.post("https://linkhub-api-pnmu.onrender.com/edit",linkhub,{
             headers:{
-              'Authorization':`Bearer ${props.token}`,
+              'Authorization':`Bearer ${localStorage.getItem("access_token")}`,
             //   'Content-Type': 'multipart/form-data'
             }
           },)
@@ -51,49 +55,95 @@ export default function Create(props){
           console.log(err))
     }
     return (
-        <form action="">
-            <div>
-                <input type="text" name="gfg" id="gfg" placeholder="GeeksForGeeks"/>
+<div className="bg">
+          <form action="" className="create_form">
+            <h1 className="create_title">CODING PLATFORMS</h1>
+            <div className="flex">
+
+                <div className="inputGroup r">
+                    <input  type="text" name="gfg" id="gfg" required="" autoComplete="off"
+                    defaultValue={linksHub.gfg}/>
+                    <label htmlFor="gfg">GeeksForGeeks</label>
+                </div>
+                <div className="inputGroup">
+                <input type="text" name="codechef" id="codechef" required="" autoComplete="off"
+                 defaultValue={linksHub.codechef}/>
+                    <label htmlFor="codechef">Codechef</label>
+                </div>
+
             </div>
-            <div>
-                <input type="text" name="codechef" id="codechef" placeholder="Codechef"/>
+           
+        <div className="flex">
+        <div className="inputGroup r">
+                <input  type="text" name="leetcode" id="leetcode" className="rmargin" 
+                 defaultValue={linksHub.leetcode}/>
+                <label htmlFor="leetcode">LeetCode</label>
             </div>
-            <div>
-                <input type="text" name="leetcode" id="leetcode" placeholder="LeetCode"/>
+            <div className="inputGroup">
+                <input  type="text" name="codeforces" id="codeforces" 
+                 defaultValue={linksHub.codeforces}/>
+                <label htmlFor="codeforces">CodeForces</label>
             </div>
-            <div>
-                <input type="text" name="codeforces" id="codeforces" placeholder="CodeForces"/>
+        </div>
+            
+            <div className="flex">
+                <div className="inputGroup r">
+                    <input  type="text" name="hackerrank" id="hackerrank" className="rmargin" 
+                     defaultValue={linksHub.hackerrank}/>
+                    <label htmlFor="hackerrank">HackerRank</label>
+                </div>
+                <div className="inputGroup">
+                    <input  type="text" name="hackerearth" id="hackerearth" 
+                     defaultValue={linksHub.hackerearth}/>
+                    <label htmlFor="hackerearth">HackerEarth</label>
+                </div>
             </div>
-            <div>
-                <input type="text" name="hackerrank" id="hackerrank" placeholder="HackerRank"/>
+            <h1 className="create_title">PERSONAL WEBSITES</h1>
+            <div className="flex">
+            <div className="inputGroup r">
+                <input  type="text" name="portfolio" id="portfolio" className="rmargin" 
+                 defaultValue={linksHub.portfolio}/>
+                <label htmlFor="portfolio">Portfolio</label>
             </div>
-            <div>
-                <input type="text" name="hackerearth" id="hackerearth" placeholder="HackerEarth"/>
+            <div className="inputGroup">
+                <input  type="text" name="website" id="website" 
+                 defaultValue={linksHub.website}/>
+                <label htmlFor="website">Website</label>
             </div>
-            <div>
-                <input type="text" name="portfolio" id="portfolio" placeholder="Portfolio"/>
             </div>
-            <div>
-                <input type="text" name="website" id="website" placeholder="Website"/>
+            <h1 className="create_title">SOCIAL MEDIA</h1>
+        <div className="flex">
+            <div className="inputGroup r">
+                    <input  type="text" name="instagram" id="instagram" className="rmargin" 
+                     defaultValue={linksHub.instagram}/>
+                    <label htmlFor="instagram">Instagram</label>
             </div>
-            <div>
-                <input type="text" name="instagram" id="instagram" placeholder="Instagram"/>
+            <div className="inputGroup">
+                <input  type="text" name="facebook" id="facebook" 
+                 defaultValue={linksHub.facebook}/>
+                <label htmlFor="facebook">Facebook</label>
             </div>
-            <div>
-                <input type="text" name="linkedin" id="linkedin" placeholder="LinkedIn"/>
+        </div>
+
+        <div className="flex">
+        <div className="inputGroup r">
+                <input type="text" name="linkedin" id="linkedin" className="rmargin" 
+                 defaultValue={linksHub.linkedin}/>
+                <label htmlFor="linkedin">LinkedIn</label>
+        </div>
+        <div className="inputGroup">
+                <input  type="text" name="github" id="github" 
+                 defaultValue={linksHub.github}/>
+                <label htmlFor="github">GithHub</label>
             </div>
-            <div>
-                <input type="text" name="facebook" id="facebook" placeholder="Facebook"/>
-            </div>
-            <div>
-                <input type="text" name="github" id="github" placeholder="Github"/>
-            </div>
-            <div>
-                <button onClick={(e)=>{
+        </div>
+        <div>
+                <button className="create_btn" onClick={(e)=>{
                     e.preventDefault();
-                    edit();
-                }}>Submit</button>
+                    edit(); 
+                }}>Edit</button>
             </div>
-        </form>
+    </form>
+    </div>
     )
 }
