@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import './Css/Form.css'
 export default function Login(props){
     const navigate=useNavigate();
     async function logUser(){
@@ -14,6 +15,7 @@ export default function Login(props){
             props.setToken(response.data.token)
             console.log(response.data.token)
             props.setNav("block")
+            props.setUser(user.username)
             navigate("/")
         })
         .catch((err)=>
@@ -22,19 +24,31 @@ export default function Login(props){
 
     }
     return (
-        <form>
-        <div>
-            <input type="text" name="username" id="username" placeholder="Username"/>
+        <div class="bg">
+        <form class="login_form">
+            <h1 class="form_title">Login</h1>
+            <div class="switch_container">
+                <span class="switch_btn">
+                    <Link to='/login'>Login</Link>
+                </span>
+                <span class="switch_btn">
+                    <Link to='/signup'>SignUp</Link>
+                </span>
+            </div>
+        <div >
+            <input class="form_inputs" type="text" name="username" id="username" placeholder="Username"></input>
         </div>
-        <div>
-            <input type="password" name="password" id="password" placeholder="Password"/>
+        <div >
+            <input class="form_inputs" type="password" name="password" id="password" placeholder="Password"></input>
         </div>
-        <div>
-            <button onClick={(e)=>{
+            <button class="submit_btn" onClick={(e)=>{
                 e.preventDefault();
                 logUser()
-            }}>Submit</button>
+            }}>Login</button>
+        <div class="message">
+        <Link to='/signup'>  Not a member ? Signup now </Link>
         </div>
         </form>
+        </div>
     )
 }

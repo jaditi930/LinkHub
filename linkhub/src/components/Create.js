@@ -1,4 +1,6 @@
 import axios from "axios";
+import './Css/Create.css';
+
 export default function Create(props){
     async function create(){
         console.log(props.token)
@@ -32,41 +34,55 @@ export default function Create(props){
     }
     return (
         <form action="">
-            <div>
-                <input type="text" name="gfg" id="gfg" placeholder="GeeksForGeeks"/>
-            </div>
-            <div>
+            <div class="inputGroup" style={{"display":"flex"}}>
+                <input  type="text" name="gfg" id="gfg" placeholder="GeeksForGeeks" style={{marginRight:"35px"}}/>
+                <label htmlFor="gfg"></label>
                 <input type="text" name="codechef" id="codechef" placeholder="Codechef"/>
+                <label htmlFor="codechef"></label>
             </div>
-            <div>
-                <input type="text" name="leetcode" id="leetcode" placeholder="LeetCode"/>
+            {/* <div class="inputGroup">
+                <input type="text" name="codechef" id="codechef" placeholder="Codechef"/>
+                <label htmlFor="codechef"></label>
+            </div> */}
+            <div class="inputGroup">
+                <input  type="text" name="leetcode" id="leetcode" placeholder="LeetCode"/>
+                <label htmlFor="leetcode"></label>
             </div>
-            <div>
-                <input type="text" name="codeforces" id="codeforces" placeholder="CodeForces"/>
+            <div class="inputGroup">
+                <input  type="text" name="codeforces" id="codeforces" placeholder="CodeForces"/>
+                <label htmlFor="codeforces"></label>
             </div>
-            <div>
-                <input type="text" name="hackerrank" id="hackerrank" placeholder="HackerRank"/>
+            <div class="inputGroup">
+                <input  type="text" name="hackerrank" id="hackerrank" placeholder="HackerRank"/>
+                <label htmlFor="hackerrank"></label>
             </div>
-            <div>
-                <input type="text" name="hackerearth" id="hackerearth" placeholder="HackerEarth"/>
+            <div class="inputGroup">
+                <input  type="text" name="hackerearth" id="hackerearth" placeholder="HackerEarth"/>
+                <label htmlFor="hackerearth"></label>
             </div>
-            <div>
-                <input type="text" name="portfolio" id="portfolio" placeholder="Portfolio"/>
+            <div class="inputGroup">
+                <input  type="text" name="portfolio" id="portfolio" placeholder="Portfolio"/>
+                <label htmlFor="portfolio"></label>
             </div>
-            <div>
-                <input type="text" name="website" id="website" placeholder="Website"/>
+            <div class="inputGroup">
+                <input  type="text" name="website" id="website" placeholder="Website"/>
+                <label htmlFor="website"></label>
             </div>
-            <div>
-                <input type="text" name="instagram" id="instagram" placeholder="Instagram"/>
+            <div class="inputGroup">
+                <input  type="text" name="instagram" id="instagram" placeholder="Instagram"/>
+                <label htmlFor="instagram"></label>
             </div>
-            <div>
+            <div class="inputGroup">
                 <input type="text" name="linkedin" id="linkedin" placeholder="LinkedIn"/>
+                <label htmlFor="linkedin"></label>
             </div>
-            <div>
-                <input type="text" name="facebook" id="facebook" placeholder="Facebook"/>
+            <div class="inputGroup">
+                <input  type="text" name="facebook" id="facebook" placeholder="Facebook"/>
+                <label htmlFor="facebook"></label>
             </div>
-            <div>
-                <input type="text" name="github" id="github" placeholder="Github"/>
+            <div class="inputGroup">
+                <input  type="text" name="github" id="github" placeholder="Github"/>
+                <label htmlFor="github"></label>
             </div>
             <div>
                 <button onClick={(e)=>{

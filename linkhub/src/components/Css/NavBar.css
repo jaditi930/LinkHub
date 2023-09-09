@@ -1,0 +1,15 @@
+.nav_ul{
+    display: flex;
+    list-style-type: none;
+    background-color: rgb(64, 64, 205);
+    align-content: center;
+    min-height: 40px;
+}
+.nav_li{
+color:white;
+margin:0px 20px;
+padding: 10px 20px;
+}
+.right{
+    margin-left: auto;
+}
