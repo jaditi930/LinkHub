@@ -1,14 +1,13 @@
 import axios from "axios";
-import './Css/Create.css';
+import '../Css/Create.css';
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-  import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from "react-router-dom";
 
 export default function Create(props){
     const [others,setOthers]=useState([])
-    const [profile,setProfile]=useState()
-    const navigate=useNavigate();
+    // const navigate=useNavigate();
 
     let other_fields=others.map((other,index)=>{
         return <div className="flex">
@@ -33,10 +32,11 @@ export default function Create(props){
         setOthers([...others,obj])
 
     }
-    function remove()
+    
+    function remove(index)
     {
         setOthers(oldOthers => {
-            return oldOthers.filter((_, i) => i !== others.length-1)
+            return oldOthers.filter((_, i) => i !== index)
           })
     }
     async function create(){
@@ -63,14 +63,14 @@ export default function Create(props){
             "github":document.forms[0].github.value,
             "website":document.forms[0].website.value,
             "portfolio":document.forms[0].portfolio.value,
-            "others":others_obj
+            "others":JSON.stringify(others_obj)
 
         }
         console.log(linkhub)
-        await axios.post("http://linkhub-api-pnmu.onrender.com/create",linkhub,{
+        await axios.post("http://localhost:5000/create",linkhub,{
             headers:{
               'Authorization':`Bearer ${localStorage.getItem("access_token")}`,
-              'Content-Type':"multipart/form-data",
+              'Content-type': "multipart/form-data"
             }
           },)
           .then((response)=>
@@ -80,17 +80,10 @@ export default function Create(props){
     }
     return (
         <div className="bg">
-          <form className="create_form" 
-        //   onSubmit={(e)=>{
-        //     e.preventDefault();
-        //   }}
-          >
+          <form className="create_form">
             <h1 className="create_title">PROFILE</h1>
             <div className="image_box">
-                <input type="file" id="image" onChange={(e)=>{
-                    console.log(e.target.files[0])
-                    setProfile(e.target.files[0])
-                }}/>
+                <input type="file" id="image"/>
             </div>
             <h1 className="create_title">CODING PLATFORMS</h1>
             <div className="flex">

@@ -24,7 +24,7 @@ export default function View(){
           <form action="" className="create_form">
           <h1 className="create_title">PROFILE</h1>
           <div className="image">
-          <img src={`https://linkhub-api-pnmu.onrender.com/${linksHub.path}`} height="200" width="200" style={{borderRadius:"50%"}}/>
+          <img src={`https://linkhub-api-pnmu.onrender.com/profiles/${linksHub.path}`} height="200" width="200" style={{borderRadius:"50%"}}/>
           </div>
 
             { linksHub.gfg || linksHub.codechef || linksHub.leetcode || linksHub.codeforces || linksHub.hackerrank || linksHub.hackerearth  ?

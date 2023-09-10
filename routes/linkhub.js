@@ -16,10 +16,12 @@ router.post("/create", validateToken, asyncHandler(async(req,res)=>{
         res.status(400).json({"message":"LinkHub already exists."})
         return;
     }
-    console.log(req.body)
     const {gfg,leetcode,codechef,codeforces,hackerrank,hackerearth,
         facebook,instagram,linkedin,github,website,portfolio,others}       = req.body
-    const def_path="user.jpeg"
+        console.log(req.body)
+        console.log(others)
+
+    const def_path="user.png"
     var path=""
     try{
         const {profile}=req.files;
@@ -33,7 +35,7 @@ router.post("/create", validateToken, asyncHandler(async(req,res)=>{
     console.log(others)
     const linkHub=new LinkHub({user:req.user.username,gfg,leetcode,codechef,codeforces,hackerrank,hackerearth,
         facebook,instagram,linkedin,github,website,portfolio,path})
-        linkHub.set("others",others)
+        linkHub.set("others",JSON.parse(others))
         linkHub.save()
         if(path!=def_path)
         res.status(200).json(linkHub)

@@ -21,7 +21,7 @@ export default function SignUp(){
         })
     }
     return (
-        <div className="bg">
+        <div className="bg" style={{height:"90vh"}}>
         <form classNameName="login_form">
             <h1 className="form_title">SignUp</h1>
             <div className="message">Become a LinkHub member now! </div>

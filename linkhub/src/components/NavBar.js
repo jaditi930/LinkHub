@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import './Css/NavBar.css'
+import '../Css/NavBar.css'
 import { useNavigate } from "react-router-dom";
 
 export default function NavBar(props){
     const navigate=useNavigate();
     function logOut(){
         props.setToken("")
-        localStorage.removeItem("acces_token")
+        localStorage.removeItem("access_token")
         localStorage.removeItem("username")
         navigate("/")
       }
@@ -17,7 +17,7 @@ export default function NavBar(props){
                 <div>
                 <li className="nav_li" style={{fontWeight:"600",letterSpacing:"2px"}}><Link to='/'>LINKHUB</Link></li>
                 </div>
-                {props.isLogged ? (
+                {localStorage.getItem("access_token") ? (
                 <div style={{alignSelf:"center",display:"flex"}}>
                 <li className="nav_li"><Link to='/create'>Create</Link></li>
                 <li className="nav_li"><Link to={`/${localStorage.getItem("username")}`}>Show</Link></li>
@@ -28,9 +28,9 @@ export default function NavBar(props){
                 (
                     ""
                 )}
-                {props.isLogged  ? (
+                {localStorage.getItem("access_token")  ? (
                 <div style={{marginLeft:"auto",display:"flex"}}>
-                <li className="nav_li rbtn" onClick={logOut} style={{color:"white"}}>Logout</li>
+                <li className="nav_li rbtn" onClick={logOut} style={{color:"white",cursor:"pointer"}}>Logout</li>
                 </div>
                 )
                 :

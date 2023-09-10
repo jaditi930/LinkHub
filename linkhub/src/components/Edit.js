@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
 export default function Edit(props){
     const [linksHub,setLinksHub]=useState([])
@@ -9,7 +11,6 @@ export default function Edit(props){
             {
                 headers:{
                   'Authorization':`Bearer ${localStorage.getItem("access_token")}`,
-                //   'Content-Type': 'multipart/form-data'
                 }
             })
             .then((response)=>{
@@ -24,10 +25,39 @@ export default function Edit(props){
         )()
     },[]
     )
+    // function populate()
+    // {
+    //     let inp=others.length;
+    //     let obj=[`others_t${inp}`,`others_v${inp}`]
+    //     setOthers([...others,obj])
+
+    // }
+    // function remove()
+    // {
+    //     setOthers(oldOthers => {
+    //         return oldOthers.filter((_, i) => i !== others.length-1)
+    //       })
+    // }
+    let other_fields=linksHub.others.map((other,index)=>{
+        console.log(other)
+        return <div className="flex">
+        <div className="inputGroup r">
+                <input type="text" id={`others_t${index}`} defaultValue={""} placeholder="Title"/>
+                </div>
+                 <div class="inputGroup">
+                <input type="text" id={`others_v${index}`} defaultValue={""} placeholder="Link Goes Here"/>
+                </div>
+                <div>
+                <FontAwesomeIcon icon={faTrashCan} style={{color: "#e2e5e9",}} onClick={()=>{
+                    // remove()
+                }}/>
+                </div>
+                </div>
+    })
     async function edit(){
         console.log(props.token)
         const linkhub={
-            // "profile":document.forms[0].gfg.value,
+            "profile":document.getElementById("image").files[0],
             "gfg":document.forms[0].gfg.value,
             "leetcode":document.forms[0].leetcode.value,
             "codechef":document.forms[0].codechef.value,
@@ -46,7 +76,7 @@ export default function Edit(props){
         await axios.post("https://linkhub-api-pnmu.onrender.com/edit",linkhub,{
             headers:{
               'Authorization':`Bearer ${localStorage.getItem("access_token")}`,
-            //   'Content-Type': 'multipart/form-data'
+              'Content-Type': 'multipart/form-data'
             }
           },)
           .then((response)=>
@@ -57,6 +87,20 @@ export default function Edit(props){
     return (
 <div className="bg">
           <form action="" className="create_form">
+
+          <h1 className="create_title">PROFILE</h1>
+
+            <div className="image_box">
+
+            {/* <img src={`https://linkhub-api-pnmu.onrender.com/profiles/${linksHub.path}`} 
+            height="200" width="200" style={{borderRadius:"50%"}} id="edit_image"/> */}
+
+            <input type="file" onClick={(e)=>{
+                e.preventDefault();
+            }}/>
+
+          </div>
+
             <h1 className="create_title">CODING PLATFORMS</h1>
             <div className="flex">
 
@@ -137,6 +181,18 @@ export default function Edit(props){
                 <label htmlFor="github">GithHub</label>
             </div>
         </div>
+        <div id="others">
+            <div style={{display:"flex"}}>
+        <h1 className="create_title">OTHERS</h1>
+        <button className="add_others" type="button" onClick={(e)=>{
+            e.preventDefault();
+            // populate()
+            }} style={{marginLeft:"auto"}}>ADD MORE +
+        </button>
+            </div>
+            {other_fields}
+        </div>
+
         <div>
                 <button className="create_btn" onClick={(e)=>{
                     e.preventDefault();

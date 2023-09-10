@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
-import './Css/Form.css'
+import '../Css/Form.css'
 export default function Login(props){
     const navigate=useNavigate();
     async function logUser(){
@@ -15,10 +15,7 @@ export default function Login(props){
             props.setToken(response.data.token)
             console.log(response.data.token)
             localStorage.setItem("access_token",response.data.token)
-            props.setNav("block")
-            // props.setUser(user.username)
             localStorage.setItem("username",user.username)
-            props.setLogged(true)
             navigate("/")
         })
         .catch((err)=>
@@ -27,7 +24,7 @@ export default function Login(props){
 
     }
     return (
-        <div className="bg">
+        <div className="bg" style={{height:"90vh"}}>
         <form className="login_form">
             <h1 className="form_title">Login</h1>
             <div className="switch_container">
