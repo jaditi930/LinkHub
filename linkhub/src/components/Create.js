@@ -10,45 +10,49 @@ export default function Create(props){
     // const navigate=useNavigate();
 
     let other_fields=others.map((other,index)=>{
-        return <div className="flex">
+        return <div className="flex" key={index}>
         <div className="inputGroup r">
-                <input type="text" id={`others_t${index}`} placeholder="Title"/>
+                <input type="text" name="title" placeholder="Title" value={other.title} onChange={(e)=>{
+                    handleChange(index,e)}}
+                />
                 </div>
-                 <div class="inputGroup">
-                <input type="text" id={`others_v${index}`} placeholder="Link Goes Here"/>
+                 <div className="inputGroup">
+                <input type="text" name="value" placeholder="Link Goes Here" value={other.value} onChange={(e)=>{
+                    handleChange(index,e)}}/>
                 </div>
                 <div>
                 <FontAwesomeIcon icon={faTrashCan} style={{color: "#e2e5e9",}} onClick={()=>{
-                    remove()
+                    remove(index)
                 }}/>
                 </div>
                 </div>
     })
-
-    function populate()
-    {
-        let inp=others.length;
-        let obj=[`others_t${inp}`,`others_v${inp}`]
-        setOthers([...others,obj])
-
-    }
+    let handleChange = (i, e) => {
+        let newFormValues = [...others];
+        newFormValues[i][e.target.name] = e.target.value;
+        setOthers(newFormValues);
+     }
+        
+    let add = () => {
+        setOthers([...others, { title: "", value: "" }])
+     }
     
-    function remove(index)
-    {
-        setOthers(oldOthers => {
-            return oldOthers.filter((_, i) => i !== index)
-          })
+    let remove = (i) => {
+        let newFormValues = [...others];
+        newFormValues.splice(i, 1);
+        setOthers(newFormValues)
     }
+
     async function create(){
         console.log(props.token)
         let others_obj={}
+
+        console.log(others)
         for(let i=0;i<others.length;i++)
-        {  
-            console.log(others[i][0])
-            let key=document.getElementById(others[i][0]).value;
-            let value=document.getElementById(others[i][1]).value;
-            others_obj[`${key}`]=value;
+        { 
+            others_obj[others[i].title]=others[i].value
         }
+        console.log(others_obj)
         const linkhub={
             "profile":document.getElementById("image").files[0],
             "gfg":document.forms[0].gfg.value,
@@ -67,7 +71,7 @@ export default function Create(props){
 
         }
         console.log(linkhub)
-        await axios.post("http://localhost:5000/create",linkhub,{
+        await axios.post("https://linkhub-api-pnmu.onrender.com/create",linkhub,{
             headers:{
               'Authorization':`Bearer ${localStorage.getItem("access_token")}`,
               'Content-type': "multipart/form-data"
@@ -101,7 +105,7 @@ export default function Create(props){
            
         <div className="flex">
         <div className="inputGroup r">
-                <input  type="text" name="leetcode" id="leetcode" class="rmargin"/>
+                <input  type="text" name="leetcode" id="leetcode" className="rmargin"/>
                 <label htmlFor="leetcode">LeetCode</label>
             </div>
             <div className="inputGroup">
@@ -112,7 +116,7 @@ export default function Create(props){
             
             <div className="flex">
                 <div className="inputGroup r">
-                    <input  type="text" name="hackerrank" id="hackerrank" class="rmargin"/>
+                    <input  type="text" name="hackerrank" id="hackerrank" className="rmargin"/>
                     <label htmlFor="hackerrank">HackerRank</label>
                 </div>
                 <div className="inputGroup">
@@ -124,7 +128,7 @@ export default function Create(props){
 
             <div className="flex">
             <div className="inputGroup r">
-                <input  type="text" name="portfolio" id="portfolio" class="rmargin"/>
+                <input  type="text" name="portfolio" id="portfolio" className="rmargin"/>
                 <label htmlFor="portfolio">Portfolio</label>
             </div>
             <div className="inputGroup">
@@ -137,7 +141,7 @@ export default function Create(props){
 
         <div className="flex">
             <div className="inputGroup r">
-                    <input  type="text" name="instagram" id="instagram" class="rmargin"/>
+                    <input  type="text" name="instagram" id="instagram" className="rmargin"/>
                     <label htmlFor="instagram">Instagram</label>
             </div>
             <div className="inputGroup">
@@ -148,7 +152,7 @@ export default function Create(props){
 
         <div className="flex">
         <div className="inputGroup r">
-                <input type="text" name="linkedin" id="linkedin" class="rmargin"/>
+                <input type="text" name="linkedin" id="linkedin" className="rmargin"/>
                 <label htmlFor="linkedin">LinkedIn</label>
         </div>
         <div className="inputGroup">
@@ -162,7 +166,7 @@ export default function Create(props){
         <h1 className="create_title">OTHERS</h1>
         <button className="add_others" type="button" onClick={(e)=>{
             e.preventDefault();
-            populate()
+            add()
             }} style={{marginLeft:"auto"}}>ADD MORE +
         </button>
             </div>

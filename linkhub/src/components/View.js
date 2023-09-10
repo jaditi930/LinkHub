@@ -1,8 +1,12 @@
 import axios from "axios";
 import { useEffect,useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
 export default function View(){
     const [linksHub,setLinksHub]=useState([])
+    const [others,setOthers]=useState([])
+
     useEffect(()=>{(async()=> {
             const user=window.location.href.split('/')[3]
             console.log(user)
@@ -10,6 +14,14 @@ export default function View(){
             .then((response)=>{
                 setLinksHub(response.data)
                 console.log(response.data)
+                let p=response.data.others;
+                let o=[]
+                Object.entries(p).forEach((key,index)=>{
+                    console.log(key)
+                    o.push(key)
+                })
+                // console.log(o)
+                setOthers(o);
             })
             .catch((err)=>{
                 console.log(err)
@@ -18,14 +30,37 @@ export default function View(){
         )()
     },[]
     )
+
+    let other_fields=others.map((other,index)=>{
+        console.log(other)
+        return <div className="flex">
+        <div className="inputGroup r">
+                <input type="text" placeholder="Title" value={other[0]}
+                />
+                </div>
+                 <div class="inputGroup">
+                <input type="text"  placeholder="Link Goes Here" value={other[1]}
+                />
+                </div>
+                </div>
+    })
     return (
         <>
         <div className="bg">
+            { linksHub !== null  ?
+    (
           <form action="" className="create_form">
+            {linksHub.path ?
+          (
+            <>
           <h1 className="create_title">PROFILE</h1>
           <div className="image">
           <img src={`https://linkhub-api-pnmu.onrender.com/profiles/${linksHub.path}`} height="200" width="200" style={{borderRadius:"50%"}}/>
           </div>
+          </>
+          ):
+          ( "" )
+            }
 
             { linksHub.gfg || linksHub.codechef || linksHub.leetcode || linksHub.codeforces || linksHub.hackerrank || linksHub.hackerearth  ?
             (<h1 className="create_title">CODING PLATFORMS</h1>)
@@ -153,7 +188,20 @@ export default function View(){
         ("")
         }
         </div>
+        { other_fields.length>0 ?
+        (<div id="others">
+            <div style={{display:"flex"}}>
+        <h1 className="create_title">OTHERS</h1>
+            </div>
+            {other_fields}
+        </div>
+        ):
+        ( "" )
+        }
+
     </form>
+    ) : ( "" )
+    }
     </div>
         </>
     )

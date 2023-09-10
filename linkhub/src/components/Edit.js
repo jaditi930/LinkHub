@@ -4,19 +4,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
 export default function Edit(props){
-    const [linksHub,setLinksHub]=useState([])
+    const [linksHub,setLinksHub]=useState({})
+    const [others,setOthers]=useState([])
     useEffect(()=>{(async()=> {
-            console.log(props.user)
-            await axios.get(`https://linkhub-api-pnmu.onrender.com/${localStorage.getItem("username")}`,
-            {
-                headers:{
-                  'Authorization':`Bearer ${localStorage.getItem("access_token")}`,
-                }
-            })
+            await axios.get(`https://linkhub-api-pnmu.onrender.com/${localStorage.getItem("username")}/`)
             .then((response)=>{
                 setLinksHub(response.data)
-                console.log(response.data)
-            })
+                // console.log(response.data.others)
+                let p=response.data.others;
+                let o=[]
+                Object.entries(p).forEach((key,index)=>{
+                    console.log(key)
+                    o.push(key)
+                })
+                // console.log(o)
+                setOthers(o);
+            }
+            )
             .catch((err)=>{
                 console.log(err)
             })
@@ -25,39 +29,53 @@ export default function Edit(props){
         )()
     },[]
     )
-    // function populate()
-    // {
-    //     let inp=others.length;
-    //     let obj=[`others_t${inp}`,`others_v${inp}`]
-    //     setOthers([...others,obj])
-
-    // }
-    // function remove()
-    // {
-    //     setOthers(oldOthers => {
-    //         return oldOthers.filter((_, i) => i !== others.length-1)
-    //       })
-    // }
-    let other_fields=linksHub.others.map((other,index)=>{
+            
+    let add = () => {
+        setOthers([...others, ["",""]])
+     }
+    
+    let remove = (i) => {
+        let newFormValues = [...others];
+        newFormValues.splice(i, 1);
+        setOthers(newFormValues)
+    }
+    let handleChange = (i, j,e) => {
+        let newFormValues = [...others];
+        newFormValues[i][j] = e.target.value;
+        setOthers(newFormValues);
+     }
+    let other_fields=others.map((other,index)=>{
         console.log(other)
         return <div className="flex">
         <div className="inputGroup r">
-                <input type="text" id={`others_t${index}`} defaultValue={""} placeholder="Title"/>
+                <input type="text" placeholder="Title" value={other[0]}
+                onChange={(e)=>{
+                    handleChange(index,0,e)}}
+                />
                 </div>
                  <div class="inputGroup">
-                <input type="text" id={`others_v${index}`} defaultValue={""} placeholder="Link Goes Here"/>
+                <input type="text"  placeholder="Link Goes Here" value={other[1]}
+                onChange={(e)=>{
+                    handleChange(index,1,e)}}
+                />
                 </div>
                 <div>
                 <FontAwesomeIcon icon={faTrashCan} style={{color: "#e2e5e9",}} onClick={()=>{
-                    // remove()
+                    remove(index)
                 }}/>
                 </div>
                 </div>
     })
     async function edit(){
         console.log(props.token)
+        let o={}
+        for(let i=0;i<others.length;i++)
+        {
+            o[`${others[i][0]}`]=others[i][1]
+        }
+        console.log(o)
         const linkhub={
-            "profile":document.getElementById("image").files[0],
+            "profile":"",
             "gfg":document.forms[0].gfg.value,
             "leetcode":document.forms[0].leetcode.value,
             "codechef":document.forms[0].codechef.value,
@@ -70,7 +88,14 @@ export default function Edit(props){
             "github":document.forms[0].github.value,
             "website":document.forms[0].website.value,
             "portfolio":document.forms[0].portfolio.value,
+            "others":JSON.stringify(o)
 
+        }
+        try{
+            linksHub.profile=document.getElementById("image").files[0]
+        }
+        catch{
+            
         }
         console.log(linkhub)
         await axios.post("https://linkhub-api-pnmu.onrender.com/edit",linkhub,{
@@ -83,7 +108,7 @@ export default function Edit(props){
           console.log(response))
           .catch((err)=>
           console.log(err))
-    }
+        }
     return (
 <div className="bg">
           <form action="" className="create_form">
@@ -186,7 +211,7 @@ export default function Edit(props){
         <h1 className="create_title">OTHERS</h1>
         <button className="add_others" type="button" onClick={(e)=>{
             e.preventDefault();
-            // populate()
+            add()
             }} style={{marginLeft:"auto"}}>ADD MORE +
         </button>
             </div>

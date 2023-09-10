@@ -44,6 +44,9 @@ router.post("/create", validateToken, asyncHandler(async(req,res)=>{
 router.post("/edit",validateToken,  asyncHandler(async(req,res)=>{
 
     const filter={"user":req.user.username}
+    let others=JSON.parse(req.body.others)
+    req.body.others=others
+
     const linkhub=await LinkHub.findOneAndUpdate(filter,
         req.body,{
             new:true
