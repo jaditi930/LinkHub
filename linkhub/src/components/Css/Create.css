@@ -14,13 +14,14 @@
     background-color: transparent;
     border-radius: 20px;
     width: 100%;
+    color:white;
   }
   
   .inputGroup label {
     font-size: 100%;
     position: absolute;
     left: 0;
-    top:10%;
+    top:0%;
     padding: 0.8em;
     margin-left: 0.5em;
     pointer-events: none;
@@ -33,12 +34,16 @@
     margin: 0em;
     margin-left: 1.3em;
     padding: 0.4em;
-    background-color: white;
+    /* background-color: white; */
+    background-color:#24252A;
+    color:#d5cccc;
   }
   
   .inputGroup :is(input:focus, input:valid) {
     border-color: rgb(150, 150, 200);
     border-color: rgb(131, 131, 208);
+    border-color: #b68a99c9;
+    border-color:#cd9cacc9;
 
   }
   .flex{
@@ -52,11 +57,16 @@
     width:60vw;
   }
   .create_title{
-    color: rgb(93, 93, 161);
+    /* color: rgb(93, 93, 161); */
+    color:rgb(120 120 201);
+    color:palevioletred;
+    color:#d98ea6;
+    color:#e88aa8;
 
   }
   .create_btn{
-    background-color: rgb(93, 93, 161);
+    /* background-color: rgb(93, 93, 161); */
+    background-color: palevioletred;;
     color:white;
     padding: 10px;
     border-radius: 10px;
@@ -64,3 +74,9 @@
     cursor: pointer;
     
   }
+  .add_others{
+    background-color: #d34675;
+    color:white;
+    padding: 10px;
+    cursor: pointer;
+}

@@ -12,20 +12,14 @@ import { BrowserRouter as Router,Routes,Route} from 'react-router-dom';
 function App() {
   const [token,setToken]=useState("");
   const [nav,setNav]=useState("none");
-  // const [user,setUser]=useState("");
-  function LogOut(){
-    // setUser("")
-    setToken("")
-    localStorage.removeItem("acces_token")
-    localStorage.removeItem("username")
+  const [isLogged,setLogged]=useState(false);
 
-  }
   return (
     <Router>
-      <NavBar nav={nav} />
+      <NavBar nav={nav} setToken={setToken} isLogged={isLogged}/>
     <Routes>
       <Route exact path="/" element={<Home/>}></Route>
-      <Route exact path="/login" element={<Login token={token} setToken={setToken} setNav={setNav}/>}></Route>
+      <Route exact path="/login" element={<Login token={token} setLogged={setLogged} setToken={setToken} setNav={setNav}/>}></Route>
       <Route path="/signup" element={<SignUp/>}></Route>
       <Route path="/create" element={<Create/>}></Route>
       <Route path="/edit" element={<Edit/>}></Route>

@@ -18,6 +18,7 @@ export default function Login(props){
             props.setNav("block")
             // props.setUser(user.username)
             localStorage.setItem("username",user.username)
+            props.setLogged(true)
             navigate("/")
         })
         .catch((err)=>

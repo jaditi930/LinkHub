@@ -3,7 +3,7 @@ export default function Home(){
 
     return (
         <>
-        <div>
+        {/* <div>
             Don't have an account? SignUp Here
             <button>
                 <Link to='/signup'>SignUp</Link>
@@ -12,7 +12,7 @@ export default function Home(){
         <div>
             Existing User Login Here
             <button><Link to='/login'>Login</Link></button>
-        </div>
+        </div> */}
         </>
     )
 }
