@@ -40,9 +40,9 @@
   }
   
   .inputGroup :is(input:focus, input:valid) {
-    border-color: rgb(150, 150, 200);
+    /* border-color: rgb(150, 150, 200);
     border-color: rgb(131, 131, 208);
-    border-color: #b68a99c9;
+    border-color: #b68a99c9; */
     border-color:#cd9cacc9;
 
   }
@@ -58,10 +58,11 @@
   }
   .create_title{
     /* color: rgb(93, 93, 161); */
-    color:rgb(120 120 201);
+    /* color:rgb(120 120 201);
     color:palevioletred;
-    color:#d98ea6;
+    color:#d98ea6; */
     color:#e88aa8;
+    text-align: center;
 
   }
   .create_btn{
@@ -79,4 +80,9 @@
     color:white;
     padding: 10px;
     cursor: pointer;
+}
+.image{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

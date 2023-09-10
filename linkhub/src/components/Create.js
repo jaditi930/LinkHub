@@ -3,9 +3,12 @@ import './Css/Create.css';
 import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
   import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from "react-router-dom";
 
 export default function Create(props){
     const [others,setOthers]=useState([])
+    const [profile,setProfile]=useState()
+    const navigate=useNavigate();
 
     let other_fields=others.map((other,index)=>{
         return <div className="flex">
@@ -17,7 +20,7 @@ export default function Create(props){
                 </div>
                 <div>
                 <FontAwesomeIcon icon={faTrashCan} style={{color: "#e2e5e9",}} onClick={()=>{
-                    remove(index)
+                    remove()
                 }}/>
                 </div>
                 </div>
@@ -30,10 +33,10 @@ export default function Create(props){
         setOthers([...others,obj])
 
     }
-    function remove(index)
+    function remove()
     {
         setOthers(oldOthers => {
-            return oldOthers.filter((_, i) => i !== index)
+            return oldOthers.filter((_, i) => i !== others.length-1)
           })
     }
     async function create(){
@@ -47,7 +50,7 @@ export default function Create(props){
             others_obj[`${key}`]=value;
         }
         const linkhub={
-            // "profile":document.forms[0].gfg.value,
+            "profile":document.getElementById("image").files[0],
             "gfg":document.forms[0].gfg.value,
             "leetcode":document.forms[0].leetcode.value,
             "codechef":document.forms[0].codechef.value,
@@ -64,9 +67,10 @@ export default function Create(props){
 
         }
         console.log(linkhub)
-        await axios.post("https://linkhub-api-pnmu.onrender.com/create",linkhub,{
+        await axios.post("http://linkhub-api-pnmu.onrender.com/create",linkhub,{
             headers:{
               'Authorization':`Bearer ${localStorage.getItem("access_token")}`,
+              'Content-Type':"multipart/form-data",
             }
           },)
           .then((response)=>
@@ -76,9 +80,18 @@ export default function Create(props){
     }
     return (
         <div className="bg">
-          <form className="create_form" onSubmit={(e)=>{
-            e.preventDefault();
-          }}>
+          <form className="create_form" 
+        //   onSubmit={(e)=>{
+        //     e.preventDefault();
+        //   }}
+          >
+            <h1 className="create_title">PROFILE</h1>
+            <div className="image_box">
+                <input type="file" id="image" onChange={(e)=>{
+                    console.log(e.target.files[0])
+                    setProfile(e.target.files[0])
+                }}/>
+            </div>
             <h1 className="create_title">CODING PLATFORMS</h1>
             <div className="flex">
 
@@ -166,6 +179,7 @@ export default function Create(props){
                 <button type="button" className="create_btn" onClick={(e)=>{
                     e.preventDefault();
                     create(); 
+                    // navigate("/view")
                 }}>Submit</button>
             </div>
     </form>
